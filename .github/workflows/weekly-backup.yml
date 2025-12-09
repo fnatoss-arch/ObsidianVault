@@ -5,6 +5,9 @@ on:
     - cron: '0 3 * * 0' # weekly on Sunday at 03:00 UTC
   workflow_dispatch: {}
 
+permissions:
+  contents: write
+
 jobs:
   backup:
     runs-on: ubuntu-latest
@@ -21,9 +24,28 @@ jobs:
           ZIPNAME="vault-backup-${TIMESTAMP}.zip"
           zip -r "$ZIPNAME" . -x ".git/*" ".obsidian/*" "node_modules/*"
           echo "name=$ZIPNAME" >> $GITHUB_OUTPUT
+          echo "tag=vault-backup-${TIMESTAMP}" >> $GITHUB_OUTPUT
 
       - name: Upload backup artifact
         uses: actions/upload-artifact@v4
         with:
           name: vault-backup
           path: ${{ steps.archive.outputs.name }}
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.archive.outputs.tag }}
+          release_name: ${{ steps.archive.outputs.tag }}
+          body: "Automated weekly backup"
+          draft: false
+          prerelease: false
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.archive.outputs.name }}
+          asset_name: ${{ steps.archive.outputs.name }}
+          asset_content_type: application/zip
