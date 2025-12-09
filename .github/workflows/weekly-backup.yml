@@ -1,0 +1,29 @@
+name: Weekly Backup — create archive and upload artifact
+
+on:
+  schedule:
+    - cron: '0 3 * * 0' # weekly on Sunday at 03:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create zip archive
+        id: archive
+        run: |
+          TIMESTAMP=$(date -u +"%Y%m%dT%H%M%SZ")
+          ZIPNAME="vault-backup-${TIMESTAMP}.zip"
+          zip -r "$ZIPNAME" . -x ".git/*" ".obsidian/*" "node_modules/*"
+          echo "name=$ZIPNAME" >> $GITHUB_OUTPUT
+
+      - name: Upload backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vault-backup
+          path: ${{ steps.archive.outputs.name }}
