@@ -1,0 +1,29 @@
+name: Backup Monitor — create issue when weekly backup completes
+
+on:
+  workflow_run:
+    workflows:
+      - "Weekly Backup — create archive and upload artifact"
+    types:
+      - completed
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create issue with backup result
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const run = context.payload.workflow_run;
+            const conclusion = run.conclusion || 'unknown';
+            const runUrl = run.html_url || '';
+            // Try to find a release created with a tag matching the run (vault-backup-*)
+            const releases = await github.rest.repos.listReleases({ owner: context.repo.owner, repo: context.repo.repo });
+            const backupRelease = releases.data.find(r => r.tag_name && r.tag_name.startsWith('vault-backup-')) || null;
+            let releaseLine = '';
+            if (backupRelease) {
+              releaseLine = `\n\nRelease created: ${backupRelease.html_url}`;
+            }
+            const body = `Weekly backup workflow completed with conclusion: **${conclusion}**\n\nWorkflow run: ${runUrl}${releaseLine}`;
+            await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title: `Backup: ${conclusion} (run ${run.id})`, body });
