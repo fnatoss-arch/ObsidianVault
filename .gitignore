@@ -1,0 +1,31 @@
+# Obsidian
+.obsidian/
+.obsidian/*
+!.obsidian/README
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails, caches
+**/.trash
+**/.cache
+
+# env
+.env
+.env.local
+
+# Node / misc (if any node projects)
+node_modules/
+
+# attachments (optional)
+.attachments/
+
+# Logs
+*.log
+
+# Backup files
+*~
+*.swp
+
