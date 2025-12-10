@@ -5,7 +5,7 @@ mood:
 sleep: 
 ---
 
-# {{title}}
+# {{date:dddd, DD MMMM YYYY}}
 
 ## Ранкове зведення
 - Топ-3 на сьогодні:
