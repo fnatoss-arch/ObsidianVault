@@ -4,7 +4,7 @@ type: weekly-review
 tags: #review #weekly
 ---
 
-# Щотижневий огляд — {{date:DD MMMM YYYY}}
+# Щотижневий огляд — {{date}}
 
 ## ✅ Що зроблено на цьому тижні
 
