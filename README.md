@@ -114,13 +114,18 @@ gh repo create REPO_NAME --public --source=. --remote=origin --push
 
 ### Налаштування Journals
 
-1. Встановіть плагін: `Settings` → `Community plugins` → пошук `Journals` → `Install`
-2. Увімкніть плагін: `Settings` → `Community plugins` → `Journals` → Enable
-3. Налаштуйте плагін:
+1. Встановіть плагіни:
+   - **Journals:** `Settings` → `Community plugins` → пошук `Journals` → `Install`
+   - **Templater:** `Settings` → `Community plugins` → пошук `Templater` → `Install`
+2. Увімкніть обидва плагіни
+3. Налаштуйте Journals:
    - **Journals folder:** `Daily`
    - **Template file location:** `Templates/Journals/Daily.md`
-   - **Date format:** `YYYY-MM-DD` (або інший за бажанням)
+   - **Date format:** `YYYY-MM-DD`
    - **Template folder:** `Templates/Journals`
+4. Налаштуйте Templater для роботи з Journals:
+   - `Settings` → `Templater` → **"Template folder location"**: `Templates`
+   - **"Trigger Templater on file creation"**: Увімкніть (важливо!)
 
 ### Важливо: Синтаксис шаблонів Journals
 
