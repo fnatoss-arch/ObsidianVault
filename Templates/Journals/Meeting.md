@@ -4,7 +4,9 @@ type: meeting
 tags: #meeting
 ---
 
-# Зустріч
+Дата: див. назву файлу вище ↑
+
+## Зустріч
 
 **Дата / час:** <% tp.date.now("dddd, D MMMM YYYY, HH:mm", 0, tp.file.title) %>
 
