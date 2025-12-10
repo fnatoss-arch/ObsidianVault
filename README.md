@@ -108,49 +108,53 @@ gh repo create REPO_NAME --public --source=. --remote=origin --push
 <% tp.file.title %>
 ```
 
-## Використання плагіна Journals (рекомендовано для щоденних нотаток)
+## Використання плагіна Periodic Notes (рекомендовано для щоденних/щотижневих нотаток)
 
-Плагін **Journals** дозволяє легко керувати щоденними/тижневими/місцевими журналами в окремій папці і автоматично створювати нотатки за шаблоном.
+Плагін **Periodic Notes** дозволяє легко керувати щоденними, щотижневими та щомісячними журналами з повною підтримкою **Templater**.
 
-### Налаштування Journals
+### Налаштування Periodic Notes
 
 1. Встановіть плагіни:
-   - **Journals:** `Settings` → `Community plugins` → пошук `Journals` → `Install`
-   - **Templater:** `Settings` → `Community plugins` → пошук `Templater` → `Install`
+   - **Periodic Notes:** `Settings` → `Community plugins` → пошук `Periodic Notes` → `Install`
+   - **Templater:** `Settings` → `Community plugins` → пошук `Templater` → `Install` (якщо ще не встановлено)
+
 2. Увімкніть обидва плагіни
-3. Налаштуйте Journals:
-   - **Journals folder:** `Daily`
-   - **Template file location:** `Templates/Journals/Daily.md`
+
+3. Налаштуйте Periodic Notes:
+   - `Settings` → `Periodic Notes` → налаштуйте для кожного типу:
+
+   **Daily:**
+   - **Daily notes folder:** `Daily`
+   - **Daily note template:** `Templates/Daily.md`
    - **Date format:** `YYYY-MM-DD`
-   - **Template folder:** `Templates/Journals`
-4. Налаштуйте Templater для роботи з Journals:
+
+   **Weekly:**
+   - **Weekly notes folder:** `Daily`
+   - **Weekly note template:** `Templates/Weekly Review.md`
+   - **Date format:** `YYYY-[W]WW`
+
+   **Monthly:**
+   - **Monthly notes folder:** `Daily`
+   - **Monthly note template:** `Templates/Monthly Review.md`
+   - **Date format:** `YYYY-MM`
+
+4. Налаштуйте Templater:
    - `Settings` → `Templater` → **"Template folder location"**: `Templates`
    - **"Trigger Templater on file creation"**: Увімкніть (важливо!)
 
-### Важливо: Синтаксис шаблонів Journals
+### Как использовать
 
-Шаблони Journals використовують **інший синтаксис**, ніж Templater:
+- **Щоденна нотатка:** натисніть команду `Periodic Notes: Open today` (можна прив'язати до гарячої клавіші)
+- **Щотижневий огляд:** команда `Periodic Notes: Open this week`
+- **Щомісячний огляд:** команда `Periodic Notes: Open this month`
 
-| Потребу | Journals синтаксис | Приклад |
-|---------|-------------------|---------|
-| Поточна дата | `{{date}}` | В frontmatter: `date: {{date}}` |
-| Назва файлу | `{{title}}` | У заголовку: `# {{title}}` |
+### Переваги Periodic Notes
 
-⚠️ **НЕ використовуйте** синтаксис Templater (`<% ... %>`) у frontmatter, інакше Journals не зможе створювати нотатки (помилка "invalid reference date format").
-
-### Доступні шаблони
-
-- `Templates/Journals/Daily.md` — щоденна нотатка
-- `Templates/Journals/Weekly.md` — щотижневий огляд
-- `Templates/Journals/Meeting.md` — протокол зустрічі
-
-### Переваги Journals
-
-- Централізоване зберігання журналів у заданій папці
-- Множинні журнали для різних контекстів (робота, особисте, проекти)
-- Навігація між період ами (попередня/наступна дата)
-- Автоматичне заповнення дат за форматом шаблону
-- Оформлення з іконками, кольорами, групуванням
+- ✅ Повна підтримка Templater (дати форматуються коректно)
+- ✅ Простота налаштування
+- ✅ Три типи журналів (щоденні, тижневі, місячні) в одному місці
+- ✅ Дата автоматично додається в заголовок через Templater
+- ✅ Навігація між періодами
 
 
 ## Зберігання вкладень і файлів (гібридна стратегія)
