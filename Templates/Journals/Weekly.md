@@ -1,10 +1,10 @@
 ---
-date: <% tp.date.now("YYYY-MM-DD") %>
+date: {{date}}
 type: weekly-review
 tags: #review #weekly
 ---
 
-# Щотижневий огляд — тиждень від <% tp.date.now("D MMMM", -7) %> до <% tp.date.now("D MMMM YYYY") %>
+# Щотижневий огляд — {{title}}
 
 ## ✅ Що зроблено на цьому тижні
 

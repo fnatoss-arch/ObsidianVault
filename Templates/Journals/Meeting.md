@@ -1,10 +1,10 @@
 ---
-date: <% tp.date.now("YYYY-MM-DD HH:mm") %>
+date: {{date}}
 type: meeting
 tags: #meeting
 ---
 
-# Зустріч: <% tp.file.cursor("Назва зустрічі") %>
+# Зустріч: [Назва зустрічі]
 
 **Дата / час:** <% tp.date.now("dddd, D MMMM YYYY, HH:mm", 0, tp.file.title) %>
 

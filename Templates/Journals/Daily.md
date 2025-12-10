@@ -1,11 +1,11 @@
 ---
-date: <% tp.date.now("YYYY-MM-DD") %>
+date: {{date}}
 tags: #daily
 mood: 
 sleep: 
 ---
 
-# <% tp.date.now("dddd, D MMMM YYYY", 0, tp.file.title, "YYYY-MM-DD") %>
+# {{title}}
 
 ## Ранкове зведення
 - Топ-3 на сьогодні:
